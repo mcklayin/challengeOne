@@ -7,20 +7,18 @@ class Path
 
     public $currentPath;
 
-    function __construct(string $path)
+    public function __construct(string $path)
     {
         $this->validateRootPath($path);
         $this->setPath($path);
     }
 
     /**
-     *
-     * Set path to variable
+     * Set path to variable.
      *
      * @param string $path
      *
      * @return void
-     *
      */
     private function setPath(string $path)
     {
@@ -32,28 +30,30 @@ class Path
     }
 
     /**
-     * Validate that root path has correct format
+     * Validate that root path has correct format.
      *
      * @param string $value
      *
-     * @return void
      * @throws Exception
+     *
+     * @return void
      */
     public function validateRootPath(string $value): void
     {
         if (!preg_match('/^(\/)+([a-zA-Z\/]{1,})+((\.\.\/)+)|(\/)+([a-zA-Z\/]{1,})$/', $value)
             && !preg_match('/^(\/)+([a-zA-Z\/]{1,})+((\.\.)+)$/', $value)) {
-            throw new Exception('Path should started from ' . self::ROOT_PATH . ' and consists of a-zA-Z, .. and /');
+            throw new Exception('Path should started from '.self::ROOT_PATH.' and consists of a-zA-Z, .. and /');
         }
     }
 
     /**
-     * Validate that path has correct format
+     * Validate that path has correct format.
      *
      * @param string $value
      *
-     * @return void
      * @throws Exception
+     *
+     * @return void
      */
     public function validatePath(string $value): void
     {
@@ -63,11 +63,9 @@ class Path
     }
 
     /**
-     *
      * @param string $value
      *
      * @return string
-     *
      */
     public function normalize(string $value): string
     {
@@ -81,13 +79,13 @@ class Path
     }
 
     /**
-     *
-     * Naviagate to specific directory
+     * Naviagate to specific directory.
      *
      * @param string $newPath
      *
-     * @return Path
      * @throws Exception
+     *
+     * @return Path
      */
     public function cd(string $newPath): Path
     {
@@ -99,16 +97,17 @@ class Path
             return $this;
         }
 
-        $path = $this->currentPath . self::DIR_SEPARATOR . $newPath;
+        $path = $this->currentPath.self::DIR_SEPARATOR.$newPath;
         $this->setPath($path);
 
         return $this;
     }
 
     /**
-     * Resolve relative path parts to absolute path
+     * Resolve relative path parts to absolute path.
      *
-     * @param  string $relativePath
+     * @param string $relativePath
+     *
      * @return string
      */
     private function resolveRelativePath(string $relativePath): string
@@ -129,7 +128,7 @@ class Path
 
         //
         if ($position != 0 || $position === false) {
-            $result = self::ROOT_PATH . $result;
+            $result = self::ROOT_PATH.$result;
         }
 
         return $result;
