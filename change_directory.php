@@ -91,12 +91,12 @@ class Path
     {
         $this->validatePath($newPath);
 
-		$path = $this->currentPath.self::DIR_SEPARATOR.$newPath;
+        $path = $this->currentPath.self::DIR_SEPARATOR.$newPath;
 
         if (strpos($newPath, self::DIR_SEPARATOR) === 0) {
             $path = $newPath;
         }
-        
+
         $this->setPath($path);
 
         return $this;
